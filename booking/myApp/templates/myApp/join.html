@@ -1,0 +1,56 @@
+{% extends "myApp/base.html"%} {% block content %}
+<h1>建立帳戶</h1>
+<!--UserName、Email、Password、PhoneNumber-->
+<br /><br />
+<form class="row g-3" method="POST" action="{% url 'join' %}">
+  {% csrf_token %}
+  <div class="col-md-6">
+    <label for="UserName" class="form-label">UserName</label>
+    <input
+      type="text"
+      class="form-control"
+      id="UserName"
+      name="username"
+      value="{{username}}"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="inputPassword4" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="inputPassword4"
+      name="password"
+      value="{{password}}"
+    />
+  </div>
+
+  <div class="col-12">
+    <label for="inputEmail4" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="inputEmail4"
+      placeholder="1234@gmail.com"
+      name="email"
+      value="{{email}}"
+    />
+  </div>
+  <div class="col-12">
+    <label for="PhoneNumber" class="form-label">PhoneNumber</label>
+    <input
+      type="text"
+      class="form-control"
+      id="PhoneNumber"
+      placeholder="0912345678"
+      name="phonenumber"
+      value="{{phonenumber}}"
+    />
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">sign up</button>
+  </div>
+</form>
+
+{% endblock %}

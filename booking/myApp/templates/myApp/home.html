@@ -1,0 +1,6 @@
+{% extends "myApp/base.html"%} {% block content %}
+<h1>酒店總覽</h1>
+
+{% for item in all %} {{item.name}}<br />
+<p>{{item.address}}</p>
+{% endfor%} {% endblock %}
