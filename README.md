@@ -90,7 +90,7 @@
 
 - django
 - bootstrap
-- 技術名稱 3
+- chatgpt4
 
 ## 技術亮點
 
