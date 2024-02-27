@@ -1,4 +1,7 @@
 {% extends "myApp/base.html"%} {% block content %}
+<span>早上好,{{request.user}}</span>
+<span><a href="{% url 'logout' %}">logout</a></span>
+
 <h1>酒店總覽</h1>
 
 {% for item in all %} {{item.name}}<br />

@@ -1,0 +1,17 @@
+{% extends "myApp/base.html" %} {% block content %}
+
+<h1>您的訂單已免費取消</h1>
+
+<a href="{% url 'user-page'  %}" class="btn btn-danger btn-sm"
+  >返回所有預訂記錄</a
+>
+
+<a href="{% url 'hotel_list'  %}" class="btn btn-danger btn-sm">尋找其他住宿</a>
+
+<a
+  href="{% url 'RoomsInAParticularHotel' booking.hotel.hotel_id%}"
+  class="btn btn-danger btn-sm"
+  >再次預訂</a
+>
+
+{% endblock %}

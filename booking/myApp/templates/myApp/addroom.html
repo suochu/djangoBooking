@@ -1,0 +1,98 @@
+{% extends "myApp/base.html"%} {% block content %}
+
+<h1>Room information added by the administrator</h1>
+
+<!-- hotel、Room type、Price、Availability、Capacity、Facilities的输入表单 -->
+<br /><br />
+
+<form class="row g-3" method="POST" action="{% url 'addroom' %}">
+  {% csrf_token %}
+
+  <!-- 酒店输入框 下拉式選匡 -->
+  <div class="col-md-6">
+    <label for="Hotel" class="form-label">酒店</label>
+
+    <select id="Hotel" name="hotel" class="form-control">
+      {% for hotel in hotels %}
+      <option value="{{ hotel.hotel_id }}">{{ hotel.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- 房型 有下拉式選匡 -->
+  <div class="col-md-6">
+    <label for="Roomtype" class="form-label">房型</label>
+    <select id="Roomtype" name="roomtype" class="form-control">
+      {% for type, name in roomtypes %}
+      <option value="{{ type }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- 價格 -->
+  <div class="col-12">
+    <label for="Price" class="form-label">價格</label>
+    <input type="number" class="form-control" id="Price" name="price" />
+  </div>
+
+  <!-- 是否供房availability -->
+  <div class="form-group mb-3">
+    <div class="form-label">是否供房</div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        class="form-control"
+        id="true"
+        name="availability"
+        value="True"
+      />
+      <label for="true">有供應</label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        class="form-control"
+        id="false"
+        name="availability"
+        value="False"
+      />
+      <label for="false">無供應</label>
+    </div>
+  </div>
+
+  <!-- 最大入住人數capacity -->
+  <div class="col-12">
+    <label for="capacity" class="form-label">最大入住人數</label>
+    <input type="number" class="form-control" id="capacity" name="capacity" />
+  </div>
+
+  <!-- 房間設施facilities -->
+  <div class="col-12">
+    <label class="form-label">房間設施</label>
+    <div>
+      {% for convenience in conveniences %}
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="conveniences"
+          value="{{ convenience.convenienceId }}"
+          id="convenience_{{ forloop.counter }}"
+        />
+        <label class="form-check-label" for="convenience_{{ forloop.counter }}">
+          {{ convenience.name }}
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 提交按钮 -->
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">add room information</button>
+  </div>
+</form>
+
+{% endblock %}

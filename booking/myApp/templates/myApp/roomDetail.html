@@ -1,0 +1,89 @@
+{% extends "myApp/base.html" %} {% block content %}
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">{{ room.hotel.name }} - {{ room.roomtype }}</h2>
+  </div>
+  <div class="card-body">
+    <p class="card-text">價格: {{ room.price }}</p>
+    <p class="card-text">住客人數: {{ room.capacity }}人</p>
+    <p class="card-text">
+      設施: {% for convenience in room.conveniences.all %}{{ convenience.name }}
+      {% endfor %}
+    </p>
+    <p class="card-text">描述: {{ room.description }}</p>
+  </div>
+  <div class="card-footer text-muted">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      查看圖片
+    </button>
+    {% if request.user.is_authenticated %}
+    <a
+      href="{% url 'simple_checkout' %}?room_id={{ room.room_id }}"
+      class="btn btn-success"
+      role="button"
+    >
+      立即下訂
+    </a>
+    {% else %}
+    <a
+      href="{% url 'simple_checkout_membernull' %}?room_id={{ room.room_id }}"
+      class="btn btn-success"
+      role="button"
+    >
+      無會員下訂</a
+    >
+    {% endif %}
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">房間圖片</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        {% if room.image %}
+        <img src="{{ room.image.url }}" class="img-fluid" alt="Room image" />
+        {% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          關閉
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+  <strong>注意:</strong> 房間信息可能已經更新，請及時查看。
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+
+{% endblock %}

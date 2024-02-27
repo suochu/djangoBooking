@@ -1,0 +1,31 @@
+{% extends "myApp/base.html" %} {% block content %}
+
+<h1>取消原因</h1>
+<p>如果你需要修改訂單，我們可以幫你找到其他解決方案。</p>
+<p>酒店: {{ booking.hotel }}</p>
+<p>{{ booking.check_in_date }}-{{ booking.check_out_date }}</p>
+<p>取消費用 TWD 0</p>
+<p>您將需支付TWD 0</p>
+<p>您將需支付: {{ booking.total_price }}</p>
+
+<form action="{% url 'confirmCancelBooking' booking.booking_id%}" method="post">
+  {% csrf_token %}
+  <label for="cancel_reason">取消原因：</label>
+  <select name="cancelReason" id="cancel_reason">
+    <option value="個人原因/計畫取消">個人原因/計畫取消</option>
+    <option value="我找到替代住宿">我找到替代住宿</option>
+    <option value="受到新冠肺炎(COVID-19)相關限制影響，無法出遊">
+      受到新冠肺炎(COVID-19)相關限制影響，無法出遊
+    </option>
+    <option value="入住人數或需求改變">入住人數或需求改變</option>
+    <option value="我在相同日期有其他訂單，需要取消不會入住的訂單">
+      我在相同日期有其他訂單，需要取消不會入住的訂單
+    </option>
+    <option value="日期或目的地有變">日期或目的地有變</option>
+    <option value="住宿方要求取消">住宿方要求取消</option>
+  </select>
+  <button type="submit" class="btn btn-danger">繼續</button>
+</form>
+<a href="" class="btn btn-secondary">我想要保留此筆訂單</a>
+
+{% endblock %}

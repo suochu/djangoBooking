@@ -1,14 +1,24 @@
 from django import forms
-from .models import User, Facility
+from .models import Convenience, Room, Customer
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
-class Userform(forms.ModelForm):
+class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'phonenumber']
+        fields = ['username', 'email', 'password1', 'password2']
 
 
-class Facilityform(forms.ModelForm):
+class CustomerForm(ModelForm):
     class Meta:
-        model = Facility
-        fields = ['name']
+        model = Customer
+        fields = ['username', 'profile_pic', 'phonenumber']
+
+
+class Roomform(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = ['hotel', 'roomtype', 'price',
+                  'capacity', 'conveniences']

@@ -1,0 +1,72 @@
+{% extends "myApp/base.html"%} {% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>您的訂房資訊</h2>
+      <div class="booking-details">
+        <div class="form-group">
+          <label>Check-in Date</label>
+          <p class="form-control-static" id="checkInDate">{{check_in_date}}</p>
+        </div>
+        <div class="form-group">
+          <label>Check-out Date</label>
+          <p class="form-control-static" id="checkOutDate">
+            {{check_out_date}}
+          </p>
+        </div>
+        <div class="form-group">
+          <label>Hotel Information</label>
+          <p class="form-control-static">{{ room.hotel.name }}</p>
+        </div>
+        <div class="form-group">
+          <label>Total Price</label>
+          <p class="form-control-static" id="totalPrice">{{total_price}}</p>
+        </div>
+        <!-- Add additional static information for other room details as needed -->
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>輸入個人資料</h2>
+      <form method="post" action="{% url 'finalconfirmation' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Full name"
+            name="username"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+            name="password"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">最後預定確認</button>
+      </form>
+    </div>
+
+    <!-- Right half will go here (see below) -->
+  </div>
+</div>
+
+{% endblock %}

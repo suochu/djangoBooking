@@ -1,0 +1,16 @@
+{% extends "myApp/base.html"%} {% block content %}
+
+<h1>Simple Checkout</h1>
+
+<div>
+  <div>
+    <img class="img" src="{{room.image.url}}" alt="" />
+    <p>{{ room.hotel.name }} - {{ room.roomtype }}</p>
+    <p>Price: $ {{room.price}}</p>
+    <p>Description: {{room.description}}</p>
+
+    {{paypal.render}}
+  </div>
+</div>
+
+{% endblock %}

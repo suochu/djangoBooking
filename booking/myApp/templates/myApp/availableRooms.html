@@ -1,0 +1,59 @@
+{% extends "myApp/base.html"%} {% block content %}
+<style>
+  .card-img-top {
+    height: 200px; /* 或你想要的固定高度 */
+    object-fit: cover; /* 覆蓋容器，保持圖片比例 */
+    width: 100%; /* 使圖片寬度與卡片容器相同 */
+  }
+</style>
+<h1>Available Rooms for {{ hotel.name }}</h1>
+<!-- 新增的表單 -->
+<form method="post" action="{% url 'check_room_availability' %}">
+  {% csrf_token %}
+  <!-- 隱藏字段保留酒店ID -->
+  <input type="hidden" name="hotelId" value="{{ hotel.hotel_id }}" />
+  <div class="form-group">
+    <label for="checkin">入住時間:</label>
+    <input type="date" id="checkin" name="checkin" required />
+  </div>
+  <div class="form-group">
+    <label for="checkout">退房時間:</label>
+    <input type="date" id="checkout" name="checkout" required />
+  </div>
+
+  <div class="form-group">
+    <label for="roomtype">房型:</label>
+    <select id="roomtype" name="roomtype" required>
+      <option value="">請選擇</option>
+      {% for type in room_types %}
+      <option value="{{ type }}">{{ type }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">查詢可用房間</button>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for room in availableRooms %}
+  <div class="col">
+    <div class="card">
+      <img src="{{ room.image.url }}" class="card-img-top" alt="Room image" />
+      <div class="card-body">
+        <h5 class="card-title">{{ room.hotel.name }} - {{ room.roomtype }}</h5>
+        <p class="card-text">一晚費用: {{ room.price }}</p>
+        <p class="card-text">入住時間: {{ check_in }}</p>
+        <p class="card-text">退房時間: {{ check_out }}</p>
+
+        <a href="{% url 'room_detail' room.pk %}" class="btn btn-primary"
+          >查看詳情</a
+        >
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <li>No available rooms at the moment.</li>
+  {% endfor %}
+</div>
+
+{% endblock %}

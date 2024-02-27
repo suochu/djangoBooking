@@ -1,4 +1,5 @@
-{% extends "myApp/base.html" %} {% block content %}
+{% extends "myApp/base.html" %}{% load static %} 
+{% block content %}
 <div class="container">
   <div class="row">
     <!-- 篩選條件面板 -->
@@ -25,7 +26,7 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  value="free_wifi"
+                  value="freeWifi"
                   id="freeWifi"
                   name="facilities"
                 />
@@ -101,26 +102,29 @@
         {% for item in all %}
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
           <!-- 控制在不同尺寸屏幕下卡片的宽度和间隔 -->
-          <div class="card">
-            <img
-              src="{{ item.image_url }}"
-              class="card-img-top"
-              alt="{{ item.name }}"
-            />
-            <div class="card-body">
+          <div class="card h-100">
+           
+            {% if item.image %}
+            <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}" />
+            {% else %}
+            <img src="{% static 'default-image-path/default.jpg' %}" class="card-img-top" alt="Default Image" />
+            {% endif %}
+            <div class="card-body d-flex flex-column"">
               <h5 class="card-title">{{ item.name }}</h5>
               <p class="card-text">{{ item.description }}</p>
               <p class="card-text">
                 <small class="text-muted">評分 {{ item.rating }}</small>
               </p>
+
               <p class="card-text">NT${{ item.price }} 起</p>
+              <a href="{% url 'RoomsInAParticularHotel' item.pk %}" class="btn btn-primary mt-auto">查看供應狀況</a> 
             </div>
           </div>
         </div>
         {% endfor %}
-        <!-- 房间卡片循环结束 -->
       </div>
     </div>
+  
   </div>
 </div>
 

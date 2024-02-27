@@ -1,0 +1,19 @@
+{% extends "myApp/base.html" %} {% block content %}
+
+<h2>查找可用房間</h2>
+<form method="get">
+  {{ form.as_p }}
+  <button type="submit">搜索</button>
+</form>
+
+{% if rooms %}
+<h2>可用房間</h2>
+<ul>
+  {% for room in rooms %}
+  <li>{{ room.hotel }} - {{ room.roomtype }}</li>
+  <li>{{ room.floor }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>選擇日期查找可用房間。</p>
+{% endif %} {% endblock %}

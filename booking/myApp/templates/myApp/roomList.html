@@ -1,0 +1,45 @@
+{% extends "myApp/base.html" %} {% block content %}
+<h2>房間列表</h2>
+{% load widget_tweaks %}
+
+<div class="card">
+  <div class="card-header">過濾條件</div>
+  <div class="card-body">
+    <form method="get" class="form">
+      {% for field in filter.form %}
+
+      <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label"
+          >{{ field.label }}</label
+        >
+        {{ field|add_class:'form-control' }}
+      </div>
+
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">過濾</button>
+    </form>
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for room in filter.qs %}
+  <div class="col">
+    <div class="card">
+      <img src="{{ room.image.url }}" class="card-img-top" alt="Room image" />
+      <div class="card-body">
+        <h5 class="card-title">{{ room.hotel.name }} - {{ room.roomtype }}</h5>
+        <p class="card-text">價格: {{ room.price }}</p>
+        <p class="card-text">容量: {{ room.capacity }}</p>
+        <a href="{% url 'room_detail' room.pk %}" class="btn btn-primary"
+          >查看詳情</a
+        >
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <li>沒有找到符合條件的房間。</li>
+  {% endfor %}
+</div>
+
+{% endblock %}

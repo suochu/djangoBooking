@@ -21,6 +21,48 @@
       <title>User site</title>
     </head>
     <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'hotel_list' %}">愛旅行</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  {% if request.user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="{% url 'user-page' %}">訂單和旅程</a></li>
+                      <li><a class="dropdown-item" href="{% url 'customer' %}">管理帳戶</a></li>
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">登出</a></li>
+                    </ul>
+                  </li>
+                  
+                    {% else %}
+                    <!-- Dropdown Menu Integration Start -->
+               
+                <!-- Dropdown Menu Integration End -->
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}">註冊</a>
+              </li>
+
+              <li class="nav-item">
+                  <a class="nav-link"  href="{% url 'login' %}">登入</a>
+              </li>
+
+{% endif %}
+
+                </ul>
+            
+              </div>
+        
+        
+        
+          </div>
+    </nav>
       <br />
       <div class="container">
         {% if messages %} {% for message in messages %}
