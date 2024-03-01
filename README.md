@@ -17,11 +17,11 @@
 註冊用戶：已註冊並登錄的用戶。
 管理員：具有管理網站內容和訂單的權限的用戶。
 
+<img width="636" alt="截圖 2024-03-01 下午11 13 27" src="https://github.com/suochu/djangoBooking/assets/89134683/ea4468f0-0210-4165-a957-9e875706e2b2">
 
-流程圖
+
 
 數據模型圖
-
 
 <img width="794" alt="截圖 2024-03-01 下午9 20 21" src="https://github.com/suochu/djangoBooking/assets/89134683/4c1dabb6-f917-4e0e-9dfa-cc773b5f3ae0">
 
@@ -46,23 +46,25 @@
 
 ## 使用教學
 
-未登入會員執行預訂
-1. 步驟一：...
-2. 步驟二：...
-3. 步驟三：...
-4. 專案操作影片
-
 登入會員執行預訂
 1. 步驟一：...
 2. 步驟二：...
 3. 步驟三：...
 4. 專案操作影片
+<br />[![未登入會員執行預訂](https://img.youtube.com/vi/bkpNEjA0BkM/0.jpg)](https://www.youtube.com/watch?v=bkpNEjA0BkM)
+
+
+未登入會員執行預訂-降低用戶預訂房間的障礙，增加頁面轉換率
+1. 步驟一：...
+2. 步驟二：...
+3. 步驟三：...
+4. 專案操作影片
+<br />[![未登入會員執行預訂](https://img.youtube.com/vi/DROtUmNnnPs/0.jpg)](https://www.youtube.com/watch?v=DROtUmNnnPs)
+
 
 
 
 ## 涵蓋的技術
-
-列出您在專案中使用的主要技術和工具。
 
 - django
 - bootstrap
